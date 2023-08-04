@@ -1,26 +1,23 @@
-import React, {EventHandler, useEffect} from 'react';
+import {useEffect} from 'react';
 import './App.css'
-import {TelegramWebApps} from "telegram-webapps-types";
-
-// eslint-disable-next-line
-// @ts-ignore
-const tg: TelegramWebApps.WebApp = window.Telegram.WebApp;
+import {useTelegram} from "./hooks/useTelegram.ts";
+import {RouterProvider} from "react-router-dom";
+import {router} from "./router";
+import Header from "./components/Header";
 
 function App() {
-    useEffect(() => {
-        tg.ready();
-    }, []);
+	const {tg} = useTelegram();
 
-    const handleCloseButtonClick: EventHandler<React.MouseEvent> = () => {
-        tg.close();
-    }
+	useEffect(() => {
+		tg.ready();
+	}, [tg]);
 
-  return (
-    <div>
-        <p>Привет</p>
-        <button onClick={handleCloseButtonClick}>Закрыть</button>
-    </div>
-  )
+	return (
+		<div>
+			<Header/>
+			<RouterProvider router={router}/>
+		</div>
+	)
 }
 
 export default App
