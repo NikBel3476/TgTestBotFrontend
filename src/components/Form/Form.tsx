@@ -7,7 +7,7 @@ const Form = () => {
 	const {tg} = useTelegram();
 	const [country, setCountry] = useState<string>('');
 	const [street, setStreet] = useState<string>('');
-	const [subjectType, setSubjectType] = useState<string>('');
+	const [subjectType, setSubjectType] = useState<'legal' | 'physical'>('physical');
 
 	const handleCountryInputChange: EventHandler<React.ChangeEvent> = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setCountry(event.target.value);
@@ -18,7 +18,9 @@ const Form = () => {
 	}
 
 	const handleSubjectTypeInputChange: EventHandler<React.ChangeEvent> = (event: React.ChangeEvent<HTMLSelectElement>) => {
-		setSubjectType(event.target.value);
+		if (event.target.value === 'legal' || event.target.value === 'physical') {
+			setSubjectType(event.target.value);
+		}
 	}
 
 	const handleTgMainButtonClick = useCallback(() => {
