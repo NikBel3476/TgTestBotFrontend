@@ -49,7 +49,7 @@ const Form = () => {
 		return () => {
 			tg.offEvent('mainButtonClicked', handleTgMainButtonClick);
 		}
-	}, []);
+	}, [tg, handleTgMainButtonClick]);
 
 	return (
 		<form className={cn(styles.form)}>
